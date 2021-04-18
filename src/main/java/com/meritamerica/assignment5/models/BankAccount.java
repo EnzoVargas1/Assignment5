@@ -6,6 +6,7 @@ public abstract class BankAccount {
 	public BankAccount(double balance, double interestRate) {
 		this.balance = balance;
 		this.interestRate = interestRate;
+		accountNumber = nextAccountNumber++;
 	}
 
 	public BankAccount(double balance, double interestRate, java.util.Date accountOpenedOn) {
@@ -81,7 +82,7 @@ public abstract class BankAccount {
 		String toStr =  "Acct Num "+getAccountNumber()+ " balance "+getBalance();
 		return toStr;
 	}
-	
+	private static long nextAccountNumber = 0;
 	private double balance;
 	private double interestRate;
 	private long accountNumber;
