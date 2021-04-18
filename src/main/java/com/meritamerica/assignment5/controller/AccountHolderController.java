@@ -58,6 +58,11 @@ public class AccountHolderController
 	@GetMapping( value = "/AccountHolder/{id}" )
 	public AccountHolder getAccountHolderById( @PathVariable int id ) throws NoSuchResourceFoundException
 	{
+//		for( AccountHolder ah : MeritBank.getAccountHolders() )
+//			if( ah.getId() == id ) return ah;
+//
+//		return null;
+
 		if( id > MeritBank.getAccountHolders().length - 1 )
 		{
 			throw new NoSuchResourceFoundException( "No Such Resource Found" );
