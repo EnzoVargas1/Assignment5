@@ -2,8 +2,17 @@ package com.meritamerica.assignment5.models;
 
 public class CDOffering {
 	public CDOffering(int term, double interestRate) {
+		this.id = nextId++;
 		this.term = term;
 		this.interestRate = interestRate;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getTerm() {
@@ -34,7 +43,8 @@ public class CDOffering {
 		String cdString = this.getTerm() + "," + this.getInterestRate();
 		return cdString;
 	}
-
+    private static int nextId = 0;
+    private int id;
 	private int term;
 	private double interestRate;
 

@@ -5,8 +5,12 @@ import java.util.StringTokenizer;
 
 public class CheckingAccount extends BankAccount {
 	
+	
+	public CheckingAccount() {
+		super(nextAccountNumber++, 0, CHECKING_INTERESTRATE, new Date());
+	}
 	public CheckingAccount(double balance) {
-		super(balance,CHECKING_INTERESTRATE);
+		super(nextAccountNumber++, balance, CHECKING_INTERESTRATE, new Date());
 	}
 	public CheckingAccount(long accountNumber, double balance, double interestRate,java.util.Date accountOpenedOn) {
 		super(accountNumber,balance,interestRate,accountOpenedOn);
@@ -23,4 +27,5 @@ public class CheckingAccount extends BankAccount {
 	}
 	
 	public static final double CHECKING_INTERESTRATE= 0.0001;
+	private static long nextAccountNumber = 0;
 }

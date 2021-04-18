@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.meritamerica.assignment5.exceptions.InvalidRequestException;
 import com.meritamerica.assignment5.models.CDOffering;
 import com.meritamerica.assignment5.models.MeritBank;
 
+@RestController
 public class CDOfferingsController {
 	
 	ArrayList<CDOffering> cdOfferings = new ArrayList<CDOffering>();

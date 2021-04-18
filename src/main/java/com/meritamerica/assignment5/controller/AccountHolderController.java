@@ -32,7 +32,7 @@ public class AccountHolderController {
 	}
 	
 	
-	@PostMapping(value = "/addAccountHolders")
+	@PostMapping(value = "/AccountHolders")
 	public AccountHolder addAccountHolder(@RequestBody AccountHolder account) throws InvalidRequestException{
 		
 		boolean isNull = account.getFirstName()== null || 
@@ -51,13 +51,13 @@ public class AccountHolderController {
 	}
 	
 	
-	@GetMapping(value = "/getAccountHolders")
+	@GetMapping(value = "/AccountHolders")
 	public AccountHolder[] getAccountHolders() {
 		return MeritBank.getAccountHolders();
 	}
 	
 	
-	@GetMapping(value = "/getAccountHolder/{id}")
+	@GetMapping(value = "/AccountHolders/{id}")
 	public AccountHolder getAccountHolderById(@PathVariable int id)throws NoSuchResourceFoundException {
 		if(id > MeritBank.getAccountHolders().length-1) {
 			throw new  NoSuchResourceFoundException("No Such Resource Found");
