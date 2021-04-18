@@ -14,21 +14,21 @@ import com.meritamerica.assignment5.models.MeritBank;
 @RestController
 public class CDOfferingsController
 {
-
 	ArrayList<CDOffering> cdOfferings = new ArrayList<CDOffering>();
 
 	@PostMapping( value = "/CDOfferings" )
 	public CDOffering createCDOffering( @RequestBody CDOffering cdOffering ) throws InvalidRequestException
 	{
-
 		if( cdOffering.getInterestRate() <= 0 || cdOffering.getInterestRate() >= 1 )
 		{
 			throw new InvalidRequestException( "Invalid Request" );
 		}
+
 		if( cdOffering.getTerm() < 1 )
 		{
 			throw new InvalidRequestException( "Invalid Request" );
 		}
+
 		cdOfferings.add( cdOffering );
 		MeritBank.setCDOfferings( cdOfferings.toArray( new CDOffering[0] ) );
 		return cdOffering;
@@ -39,5 +39,4 @@ public class CDOfferingsController
 	{
 		return cdOfferings.toArray( new CDOffering[0] );
 	}
-
 }
