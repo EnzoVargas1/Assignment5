@@ -2,12 +2,14 @@ package com.meritamerica.assignment5.controller;
 
 import java.util.ArrayList;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meritamerica.assignment5.exceptions.InvalidRequestException;
@@ -21,8 +23,7 @@ import com.meritamerica.assignment5.models.MeritBank;
 @RestController
 public class AccountHolderController
 {
-
-	ArrayList<CDOffering> cdOfferings = new ArrayList<CDOffering>();
+	ArrayList< CDOffering > cdOfferings = new ArrayList< CDOffering >();
 
 	@RequestMapping( value = "/", method = RequestMethod.GET )
 	public String test()
@@ -30,10 +31,10 @@ public class AccountHolderController
 		return "Testing";
 	}
 
-	@PostMapping( value = "/addAccountHolders" )
+	@PostMapping( value = "/AccountHolders" )
+	@ResponseStatus( HttpStatus.CREATED )
 	public AccountHolder addAccountHolder( @RequestBody AccountHolder account ) throws InvalidRequestException
 	{
-
 		boolean isNull = account.getFirstName() == null || account.getLastName() == null || account.getSSN() == null;
 
 		boolean isBlank = account.getFirstName().length() == 0 || account.getLastName().length() == 0
@@ -48,19 +49,20 @@ public class AccountHolderController
 		return account;
 	}
 
-	@GetMapping( value = "/getAccountHolders" )
+	@GetMapping( value = "/AccountHolders" )
 	public AccountHolder[] getAccountHolders()
 	{
 		return MeritBank.getAccountHolders();
 	}
 
-	@GetMapping( value = "/getAccountHolder/{id}" )
+	@GetMapping( value = "/AccountHolder/{id}" )
 	public AccountHolder getAccountHolderById( @PathVariable int id ) throws NoSuchResourceFoundException
 	{
 		if( id > MeritBank.getAccountHolders().length - 1 )
 		{
 			throw new NoSuchResourceFoundException( "No Such Resource Found" );
 		}
+
 		return MeritBank.getAccountHolders()[id];
 	}
 
@@ -78,5 +80,4 @@ public class AccountHolderController
 		}
 		return account;
 	}
-
 }
