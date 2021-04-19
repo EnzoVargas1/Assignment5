@@ -7,8 +7,12 @@ import java.util.StringTokenizer;
 
 public class SavingsAccount extends BankAccount {
 	
+	public SavingsAccount() {
+		super(nextAccountNumber++, 0, SAVINGS_INTERESTRATE, new Date());
+	}
+	
 	public SavingsAccount(double balance) {
-		super(balance, SAVINGS_INTERESTRATE);
+		super(nextAccountNumber++, balance, SAVINGS_INTERESTRATE, new Date());
 	}
 	public SavingsAccount(long accountNumber, double balance, double interestRate,java.util.Date accountOpenedOn) {
 		super(accountNumber,balance,interestRate,accountOpenedOn);
@@ -28,4 +32,5 @@ public class SavingsAccount extends BankAccount {
 		return savings;
 	}
 	public static final double SAVINGS_INTERESTRATE = 0.01;
+	private static long nextAccountNumber = 0;
 }

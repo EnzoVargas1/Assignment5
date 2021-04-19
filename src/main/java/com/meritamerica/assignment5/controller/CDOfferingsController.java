@@ -2,9 +2,11 @@ package com.meritamerica.assignment5.controller;
 
 import java.util.ArrayList;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meritamerica.assignment5.exceptions.InvalidRequestException;
@@ -16,6 +18,7 @@ public class CDOfferingsController {
 	
 	ArrayList<CDOffering> cdOfferings = new ArrayList<CDOffering>();
 	
+	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value ="/CDOfferings")
 	public CDOffering createCDOffering(@RequestBody CDOffering cdOffering)throws InvalidRequestException {
 		
@@ -23,6 +26,7 @@ public class CDOfferingsController {
 			throw new  InvalidRequestException("Invalid Request");
 		}
 		if(cdOffering.getTerm() < 1) {
+			cdOffering = null;
 			throw new  InvalidRequestException("Invalid Request");
 		}
 		cdOfferings.add(cdOffering);
