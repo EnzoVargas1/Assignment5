@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.meritamerica.assignment5.exceptions.NoSuchResourceFoundException;
+
 public class MeritBank
 {
 	public static void addAccountHolder( AccountHolder accountHolder )
@@ -279,7 +281,15 @@ public class MeritBank
 		return null;
 	}
 
-	private static ArrayList<AccountHolder> accHolderList = new ArrayList<AccountHolder>();
+	public static CDOffering getCDOfferingById( int id ) throws NoSuchResourceFoundException
+	{
+		for( CDOffering cdo : MeritBank.getCDOfferings() )
+			if( cdo.getId() == id ) return cdo;
+
+		throw new NoSuchResourceFoundException( "No Such Resource Found" );
+	}
+
+	private static ArrayList< AccountHolder > accHolderList = new ArrayList< AccountHolder >();
 	private static long nextAccNumber;
 	private static CDOffering[] offerings;
 

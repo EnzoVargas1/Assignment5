@@ -1,15 +1,11 @@
 package com.meritamerica.assignment5.models;
 
-
-	
-
 public class CDOffering
 {
 	private static int nextId = 0;
-	 private int id;
-	 private int term;
-	 private double interestRate;
-
+	private int id;
+	private int term;
+	private double interestRate;
 
 	public CDOffering( int term, double interestRate )
 	{
@@ -19,15 +15,15 @@ public class CDOffering
 		this.id = ++nextId;
 	}
 
-
-	public int getId() {
+	public int getId()
+	{
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId( int id )
+	{
 		this.id = id;
 	}
-
 
 	public int getTerm()
 	{
@@ -66,7 +62,5 @@ public class CDOffering
 		String cdString = this.getTerm() + "," + this.getInterestRate();
 		return cdString;
 	}
-
-
 
 }
