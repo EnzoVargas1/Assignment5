@@ -68,7 +68,7 @@ public class AccountHolderController
 			throw new NoSuchResourceFoundException( "No Such Resource Found" );
 		}
 
-		return MeritBank.getAccountHolders()[id];
+		return MeritBank.getAccountHolders()[id - 1];
 	}
 
 	@PostMapping( value = "/AccountHolders/{id}/CheckingAccounts" )

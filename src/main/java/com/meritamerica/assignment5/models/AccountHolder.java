@@ -283,7 +283,7 @@ public class AccountHolder implements Comparable< AccountHolder >
 		return acString;
 	}
 
-	private static int nextId = 0;
+	private static int nextId = 1;
 	private int id;
 	private String firstName;
 	private String middleName;
