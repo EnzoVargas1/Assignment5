@@ -5,7 +5,10 @@ import java.util.StringTokenizer;
 
 public class CheckingAccount extends BankAccount {
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 7364d9517ea0090155dc47fec898db5797adb00b
 	public CheckingAccount() {
 		super(nextAccountNumber++, 0, CHECKING_INTERESTRATE, new Date());
 	}
@@ -15,6 +18,7 @@ public class CheckingAccount extends BankAccount {
 	public CheckingAccount(long accountNumber, double balance, double interestRate,java.util.Date accountOpenedOn) {
 		super(accountNumber,balance,interestRate,accountOpenedOn);
 	}
+	
 	public static CheckingAccount readFromString(String accountData) throws java.lang.NumberFormatException{
 		StringTokenizer token = new StringTokenizer(accountData, ",");
 		int numAccount = Integer.parseInt(token.nextToken());
@@ -28,4 +32,8 @@ public class CheckingAccount extends BankAccount {
 	
 	public static final double CHECKING_INTERESTRATE= 0.0001;
 	private static long nextAccountNumber = 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7364d9517ea0090155dc47fec898db5797adb00b

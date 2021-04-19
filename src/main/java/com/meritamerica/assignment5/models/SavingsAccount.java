@@ -17,6 +17,7 @@ public class SavingsAccount extends BankAccount {
 	public SavingsAccount(long accountNumber, double balance, double interestRate,java.util.Date accountOpenedOn) {
 		super(accountNumber,balance,interestRate,accountOpenedOn);
 	}
+	
 	public static SavingsAccount readFromString(String accountData) throws java.lang.NumberFormatException{
 		StringTokenizer token = new StringTokenizer(accountData, ",");
 		int numAccount = Integer.parseInt(token.nextToken());
@@ -33,4 +34,8 @@ public class SavingsAccount extends BankAccount {
 	}
 	public static final double SAVINGS_INTERESTRATE = 0.01;
 	private static long nextAccountNumber = 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7364d9517ea0090155dc47fec898db5797adb00b

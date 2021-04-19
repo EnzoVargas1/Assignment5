@@ -19,6 +19,7 @@ import com.meritamerica.assignment5.models.ExceedsCombinedBalanceLimitException;
 import com.meritamerica.assignment5.models.MeritBank;
 import com.meritamerica.assignment5.models.SavingsAccount;
 import com.meritamerica.assignment5.models.BankAccount;
+import com.meritamerica.assignment5.models.CDAccount;
 import com.meritamerica.assignment5.models.CDOffering;
 
 
@@ -60,50 +61,72 @@ public class AccountHolderController {
 	
 	@GetMapping(value = "/AccountHolders/{id}")
 	public AccountHolder getAccountHolderById(@PathVariable int id)throws NoSuchResourceFoundException {
-		if(id > MeritBank.getAccountHolders().length-1) {
+		if(id > MeritBank.getAccountHolders().length) {
 			throw new  NoSuchResourceFoundException("No Such Resource Found");
 		}
-		return MeritBank.getAccountHolders()[id];
+		return MeritBank.getAccountHolders()[id-1];
 	}
 	
 	
 	@PostMapping(value = "/AccountHolders/{id}/CheckingAccounts")
 	public CheckingAccount createNewCheckingAccount(@RequestBody CheckingAccount account, @PathVariable int id)
 	throws ExceedsCombinedBalanceLimitException, NoSuchResourceFoundException, InvalidRequestException {
-		if(id > MeritBank.getAccountHolders().length - 1) {
+		if(id > MeritBank.getAccountHolders().length) {
 			throw new  NoSuchResourceFoundException("No Such Resource Found");
 		}
 		if(account.getBalance() < 0 || MeritBank.getAccountHolders()[id].getCombinedBalance() > 250000) {
 			throw new InvalidRequestException("Invalid Request");
 		}
-		return MeritBank.getAccountHolders()[id].addCheckingAccount(account);
+		return MeritBank.getAccountHolders()[id-1].addCheckingAccount(account);
 	}
 	
 	
 	@GetMapping(value = "/AccountHolders/{id}/CheckingAccounts")
 	public CheckingAccount[] getCheckingAccount(@PathVariable int id) throws NoSuchResourceFoundException {
-		if(id > MeritBank.getAccountHolders().length-1) {
+		if(id > MeritBank.getAccountHolders().length) {
 			throw new  NoSuchResourceFoundException("No Such Resource Found");
 		}
-		return MeritBank.getAccountHolders()[id].getCheckingAccounts();
+		return MeritBank.getAccountHolders()[id-1].getCheckingAccounts();
 	}
+	
 	
 	@PostMapping(value = "/AccountHolders/{id}/SavingsAccounts")
 	public SavingsAccount createNewSavingsAccount(@RequestBody SavingsAccount account, @PathVariable int id) 
 	throws NoSuchResourceFoundException, InvalidRequestException, ExceedsCombinedBalanceLimitException {
 		
-		if(id > MeritBank.getAccountHolders().length - 1) {
+		if(id > MeritBank.getAccountHolders().length) {
 			throw new  NoSuchResourceFoundException("No Such Resource Found");
 		}
-		if(account.getBalance() < 0 || MeritBank.getAccountHolders()[id].getCombinedBalance() > 250000) {
+		if(account.getBalance() < 0 || MeritBank.getAccountHolders()[id-1].getCombinedBalance() > 250000) {
 			throw new InvalidRequestException("Invalid Request");
 		}
 		
-		return MeritBank.getAccountHolders()[id].addSavingsAccount(account);
+		return MeritBank.getAccountHolders()[id-1].addSavingsAccount(account);
 	}
 	
 	
 	
+	@GetMapping(value = "/AccountHolders/{id}/SavingsAccounts")
+	public SavingsAccount[] getSavingsAccounts(@PathVariable int id) throws NoSuchResourceFoundException {
+		if(id > MeritBank.getAccountHolders().length) {
+			throw new  NoSuchResourceFoundException("No Such Resource Found");
+		}
+		return MeritBank.getAccountHolders()[id-1].getSavingsAccounts();
+	}
+	
+	
+	@PostMapping(value = "/AccountHolders/{id}/CDAccounts")
+	public CDAccount createNewCDAccount(@RequestBody CDAccount account , @RequestBody CDOffering cdOffering, @PathVariable int id) 
+	throws NoSuchResourceFoundException, InvalidRequestException {
+		
+		if(id > MeritBank.getAccountHolders().length) {
+			throw new  NoSuchResourceFoundException("No Such Resource Found");
+		}
+		if(account.getBalance() < 0 ) {
+			throw new InvalidRequestException("Invalid Request");
+		}
+		return MeritBank.getAccountHolders()[id-1].addCDAccount(account);
+	}
 	
 	
 }

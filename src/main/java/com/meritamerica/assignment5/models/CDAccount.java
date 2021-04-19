@@ -7,6 +7,17 @@ import java.util.StringTokenizer;
 
 public class CDAccount extends BankAccount {
 	
+	public CDAccount() {
+		super(MeritBank.getNextAccountNumber(), 0, 0.01, new Date());
+		this.offering=offering;
+	}
+	
+	
+	public CDAccount(CDOffering offering) {
+		super(MeritBank.getNextAccountNumber(), 0,offering.getInterestRate(),new Date());
+		this.offering=offering;
+	}
+	
 	public CDAccount(CDOffering offering, double balance) {
 		super(MeritBank.getNextAccountNumber(), balance,offering.getInterestRate(),new Date());
 		this.offering=offering;
