@@ -85,4 +85,27 @@ public class AccountHolderController
 		}
 		return account;
 	}
+	
+	
+	@GetMapping(value = "/AccountHolders/{id}/CheckingAccounts")
+	public CheckingAccount[] getCheckingAccount(@PathVariable int id) throws NoSuchResourceFoundException {
+		if(id > MeritBank.getAccountHolders().length-1) {
+			throw new  NoSuchResourceFoundException("No Such Resource Found");
+		}
+		return MeritBank.getAccountHolders()[id].getCheckingAccounts();
+	}
+	
+	@PostMapping(value = "/AccountHolders/{id}/SavingsAccounts")
+	public SavingsAccount createNewSavingsAccount(@RequestBody SavingsAccount account, @PathVariable int id) 
+	throws NoSuchResourceFoundException, InvalidRequestException, ExceedsCombinedBalanceLimitException {
+		
+		if(id > MeritBank.getAccountHolders().length - 1) {
+			throw new  NoSuchResourceFoundException("No Such Resource Found");
+		}
+		if(account.getBalance() < 0 || MeritBank.getAccountHolders()[id].getCombinedBalance() > 250000) {
+			throw new InvalidRequestException("Invalid Request");
+		}
+		
+		return MeritBank.getAccountHolders()[id].addSavingsAccount(account);
+	}
 }
