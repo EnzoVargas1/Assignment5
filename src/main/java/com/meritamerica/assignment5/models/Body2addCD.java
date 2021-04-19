@@ -1,5 +1,9 @@
 package com.meritamerica.assignment5.models;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+
 public class Body2addCD
 {
 	public Body2addCD( double balance, CDID cd )
@@ -8,6 +12,9 @@ public class Body2addCD
 		this.cdOffering = cd;
 	}
 
+	@PositiveOrZero( message = "Balance is required" )
+	@NotNull( message = "Balance is required" )
+	@NotBlank( message = "Balance is required" )
 	double balance;
 
 	public double getBalance()

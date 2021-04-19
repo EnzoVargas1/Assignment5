@@ -2,6 +2,8 @@ package com.meritamerica.assignment5.controller;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -97,9 +99,8 @@ public class AccountHolderController< body2addCD >
 	public CheckingAccount[] getCheckingAccount( @PathVariable int id ) throws NoSuchResourceFoundException
 	{
 		if( id > MeritBank.getAccountHolders().length )
-		{
 			throw new NoSuchResourceFoundException( "No Such Resource Found" );
-		}
+
 		return MeritBank.getAccountHolders()[id - 1].getCheckingAccounts();
 	}
 
@@ -127,11 +128,17 @@ public class AccountHolderController< body2addCD >
 
 	@PostMapping( value = "/AccountHolders/{id}/CDAccounts" )
 	@ResponseStatus( HttpStatus.CREATED )
-	public CDAccount addCD( @RequestBody Body2addCD body, @PathVariable int id )
+	public CDAccount addCD( @RequestBody @Valid Body2addCD body, @PathVariable int id )
 			throws NoSuchResourceFoundException, InvalidRequestException, ExceedsFraudSuspicionLimitException
 	{
 		CDOffering cdo = MeritBank.getCDOfferingById( body.cdOffering.getId() );
+		if( body.getBalance() < 0 ) throw new InvalidRequestException( "Balance cannot be negative." );
 		return getAccountHolderByID( id ).addCDAccount( cdo, body.getBalance() );
-		// return "id=" + body.cdOffering.getId() + ", balance=" + body.getBalance();
+	}
+
+	@GetMapping( value = "/AccountHolders/{id}/CDAccounts" )
+	public CDAccount[] getCDAccounts( @PathVariable int id ) throws NoSuchResourceFoundException
+	{
+		return getAccountHolderByID( id ).getCDAccounts();
 	}
 }
