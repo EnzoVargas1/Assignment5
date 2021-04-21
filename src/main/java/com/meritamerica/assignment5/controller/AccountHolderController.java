@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.meritamerica.assignment5.exceptions.InvalidRequestException;
 import com.meritamerica.assignment5.exceptions.NoSuchResourceFoundException;
 import com.meritamerica.assignment5.models.AccountHolder;
-import com.meritamerica.assignment5.models.Body2addCD;
+//import com.meritamerica.assignment5.models.Body2addCD;
 import com.meritamerica.assignment5.models.CDAccount;
 import com.meritamerica.assignment5.models.CDOffering;
 import com.meritamerica.assignment5.models.CheckingAccount;
@@ -104,6 +104,7 @@ public class AccountHolderController< body2addCD >
 	}
 
 	@PostMapping( value = "/AccountHolders/{id}/SavingsAccounts" )
+	@ResponseStatus( HttpStatus.CREATED )
 	public SavingsAccount createNewSavingsAccount( @RequestBody SavingsAccount account, @PathVariable int id )
 			throws NoSuchResourceFoundException, InvalidRequestException, ExceedsCombinedBalanceLimitException
 	{
@@ -124,7 +125,7 @@ public class AccountHolderController< body2addCD >
 
 		return MeritBank.getAccountHolders()[id - 1].getSavingsAccounts();
 	}
-
+/*
 	@PostMapping( value = "/AccountHolders/{id}/CDAccounts" )
 	@ResponseStatus( HttpStatus.CREATED )
 	public CDAccount addCD( @RequestBody Body2addCD body, @PathVariable int id )
@@ -134,4 +135,6 @@ public class AccountHolderController< body2addCD >
 		return getAccountHolderByID( id ).addCDAccount( cdo, body.getBalance() );
 		// return "id=" + body.cdOffering.getId() + ", balance=" + body.getBalance();
 	}
+	
+	*/
 }
